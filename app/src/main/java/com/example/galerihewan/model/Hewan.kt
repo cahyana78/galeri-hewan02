@@ -7,7 +7,7 @@
  * terhadap project ini tanpa izin pemilik hak cipta.
  */
 
-package com.example.galerihewan
+package com.example.galerihewan.model
 
 data class Hewan(
         val nama: String,
