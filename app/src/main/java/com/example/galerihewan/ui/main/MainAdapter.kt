@@ -13,9 +13,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.galerihewan.model.Hewan
 import com.example.galerihewan.R
 import com.example.galerihewan.databinding.ListItemBinding
+import com.example.galerihewan.network.HewanApi
 
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
@@ -48,7 +50,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         fun bind(hewan: Hewan) = with(binding) {
             namaTextView.text = hewan.nama
             latinTextView.text = hewan.namaLatin
-            imageView.setImageResource(hewan.imageResId)
+//            imageView.setImageResource(hewan.imageResId)
+
+            Glide.with(imageView.context)
+                .load(HewanApi.getHewanUrl(hewan.imageId))
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .into(imageView)
 
             root.setOnClickListener {
                 val message = root.context.getString(R.string.message, hewan.nama)
